@@ -26,13 +26,15 @@ class OggConan(ConanFile):
         "fPIC": True
     }
 
-    requires = ["sdl/3.1.2@aleya/public", "vorbis/1.3.7@aleya/public"]
+    requires = ["sdl/3.1.2@aleya/public", "vorbis/1.3.7@aleya/public", "ogg/1.3.5@aleya/public"]
 
     def generate(self):
         tc = CMakeToolchain(self)
         tc.variables["BUILD_SHARED_LIBS"] = self.options.shared
         tc.variables["SDL3MIXER_VENDORED"] = False
         tc.variables["SDL3MIXER_INSTALL_MAN"] = False
+        tc.variables["SDL3MIXER_VORBIS"] = "VORBISFILE"
+        tc.variables["SDL3MIXER_DEPS_SHARED"] = False
         tc.generate()
         tc = CMakeDeps(self)
         tc.generate()
@@ -57,3 +59,4 @@ class OggConan(ConanFile):
         self.cpp_info.set_property("pkg_config_name", "SDL3_mixer")
 
         self.cpp_info.libs = collect_libs(self)
+        self.cpp_info.requires = ["sdl::sdl", "ogg::ogg", "vorbis::vorbisfile"]
