@@ -35,6 +35,11 @@ class OggConan(ConanFile):
         tc.variables["SDL3MIXER_INSTALL_MAN"] = False
         tc.variables["SDL3MIXER_VORBIS"] = "VORBISFILE"
         tc.variables["SDL3MIXER_DEPS_SHARED"] = False
+        tc.variables["SDL3MIXER_GME"] = False
+        tc.variables["SDL3MIXER_MIDI"] = False
+        tc.variables["SDL3MIXER_MOD"] = False
+        tc.variables["SDL3MIXER_SAMPLES"] = False
+        tc.variables["SDL3MIXER_WAVPACK"] = False
         tc.generate()
         tc = CMakeDeps(self)
         tc.generate()
